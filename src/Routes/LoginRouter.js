@@ -4,8 +4,8 @@ import { Router } from 'express'
 
 const server = Router()
 
-server.post('/login', LoginUsuario)
+server.post('/', LoginUsuario)
 
-server.get('/login', ConfereOnline)
+server.get('/', ConfereOnline)
 
 export default server;
