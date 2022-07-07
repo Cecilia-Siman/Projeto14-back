@@ -31,14 +31,13 @@ export async function LoginUsuario(req, res) {
             res.status(401).send('Dados inválidos')
         }
 
-        // const dados = { email, senha: existe.senha };
-        const dados = { email, senha };
+        const dados = { email, senha: existe.senha };
 
-        // const autorizado = bcrypt.compareSync(senha, existe.senha)
+        const autorizado = bcrypt.compareSync(senha, existe.senha)
 
-        // if (!autorizado) {
-        //     return res.status(401).send('Dados inválidos')
-        // }
+        if (!autorizado) {
+            return res.status(401).send('Dados inválidos')
+        }
 
         const token = jwt.sign(dados, chaveSecreta);
 
