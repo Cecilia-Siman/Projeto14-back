@@ -1,5 +1,6 @@
 import joi from 'joi'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import { db } from '../dbMongo/Mongo.js'
 
 
@@ -34,6 +35,8 @@ export async function LoginUsuario(req, res) {
         if (!autorizado) {
             return res.status(401).send('Dados inválidos')
         }
+
+
 
         res.status(200).send('OK')
     }
