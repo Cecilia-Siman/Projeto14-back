@@ -7,6 +7,8 @@ import { db } from '../dbMongo/Mongo.js'
 export async function LoginUsuario(req, res) {
 
     const { email, senha } = req.body;
+    const dados = { email, senha };
+    const chaveSecreta = process.env.JWT_SECRET;
 
     const userSchema = joi.object({
         email: joi.string().email().required(),
@@ -22,22 +24,20 @@ export async function LoginUsuario(req, res) {
             return
         }
 
-        // const existe = await db.collection("users").findOne({
-        //     email
-        // })
+        const existe = await db.collection("users").findOne({
+            email
+        })
 
-        // if (!existe) {
-        //     res.status(401).send('Dados inválidos')
-        // }
+        if (!existe) {
+            res.status(401).send('Dados inválidos')
+        }
 
-        // const autorizado = bcrypt.compareSync(senha, existe.senha)
+        const autorizado = bcrypt.compareSync(senha, existe.senha)
 
-        // if (!autorizado) {
-        //     return res.status(401).send('Dados inválidos')
-        // }
+        if (!autorizado) {
+            return res.status(401).send('Dados inválidos')
+        }
 
-        const dados = {email,senha};
-        const chaveSecreta = process.env.JWT_SECRET;
         const token = jwt.sign(dados, chaveSecreta);
 
         return res.status(200).send(token)
