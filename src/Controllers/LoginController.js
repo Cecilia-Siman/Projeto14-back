@@ -7,7 +7,6 @@ import { db } from '../dbMongo/Mongo.js'
 export async function LoginUsuario(req, res) {
 
     const { email, senha } = req.body;
-    const dados = { email, senha };
     const chaveSecreta = process.env.JWT_SECRET;
 
     const userSchema = joi.object({
@@ -32,6 +31,8 @@ export async function LoginUsuario(req, res) {
             res.status(401).send('Dados inválidos')
         }
 
+        const dados = { email, senha: existe.senha };
+
         const autorizado = bcrypt.compareSync(senha, existe.senha)
 
         if (!autorizado) {
@@ -40,9 +41,18 @@ export async function LoginUsuario(req, res) {
 
         const token = jwt.sign(dados, chaveSecreta);
 
+        await db.collection("online").insertOne({
+            token
+        })
+
         return res.status(200).send(token)
     }
     catch {
         return res.sendStatus(500)
     }
+}
+
+export async function ConfereOnline(req, res) {
+    const ususriosOnline = await db.collection("online").find().toArray()
+    res.send(ususriosOnline)
 }
