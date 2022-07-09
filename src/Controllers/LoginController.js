@@ -39,7 +39,9 @@ export async function LoginUsuario(req, res) {
             return res.status(401).send('Dados inválidos')
         }
 
-        const token = jwt.sign(dados, chaveSecreta);
+        const configuracoes = { expiresIn: 60 * 5 }
+
+        const token = jwt.sign(dados, chaveSecreta, configuracoes);
 
         await db.collection("online").insertOne({
             token
