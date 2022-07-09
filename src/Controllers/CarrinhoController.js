@@ -12,14 +12,14 @@ export async function MostraCarrinho(req, res) {
 
     try {
         const dados = jwt.verify(token, chaveSecreta);
-        console.log(dados)
+        res.send(dados)
 
     } catch {
         alert('seu token foi adulterado!')
         res.send(401)
     }
-    const produtosCarrinho = await db.collection("carrinho").find().toArray()
-    res.send(dados)
+    // const produtosCarrinho = await db.collection("carrinho").find().toArray()
+    // res.send(dados)
 }
 
 
