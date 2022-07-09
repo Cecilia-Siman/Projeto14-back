@@ -29,7 +29,13 @@ export async function AdicionaCarrinho(req, res) {
 
     const produto = req.body
 
-    const produtosCarrinho = await db.collection("carrinho").find().toArray()
-    res.send(produto)
+    try {
+        const produtosCarrinho = await db.collection("carrinho").insertOne(produto)
+        const meuCarrinho = await db.collection("carrinho").find().toArray()
+        res.send(meuCarrinho)
+    }
+    catch {
+        res.status(501).send('Não foi possível verificar seu carrinho!')
+    }
 }
 
