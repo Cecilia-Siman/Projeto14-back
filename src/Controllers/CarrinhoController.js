@@ -26,7 +26,10 @@ export async function MostraCarrinho(req, res) {
 export async function AdicionaCarrinho(req, res) {
 
     const token = req.headers
+
+    const produto = req.body
+
     const produtosCarrinho = await db.collection("carrinho").find().toArray()
-    res.send(produtosCarrinho)
+    res.send(produto)
 }
 
