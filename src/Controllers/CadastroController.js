@@ -8,13 +8,18 @@ export async function Cadastro(req, res) {
         name: joi.string().required(),
         email: joi.string().required().email(),
         password: joi.string().required().pattern(/[a-zA-Z0-9]{6,}/),
-        passwordConfirm: joi.any().equal(joi.ref('password')).required().messages({ 'different password':'password does not match' }),
+        passwordConfirm: joi.any().equal(joi.ref('password')).required().messages({ 'different password': 'password does not match' }),
     });
 
-    const valid = userSchema.validate(req.body);
-    const repEmail = await db.collection("users").findOne({email: req.body.email});
-    
-    if (!valid.error  && !repEmail){
+    console.log(req.body)
+
+    const { name, email, password, passwordConfirm } = req.body
+
+    // const valid = userSchema.validate(req.body);
+    const valid = userSchema.validate({ name, email, password, passwordConfirm });
+    const repEmail = await db.collection("users").findOne({ email: req.body.email });
+
+    if (!valid.error && !repEmail) {
         const cryptPassword = bcrypt.hashSync(req.body.password, 10);
 
         const newUser = {
@@ -26,7 +31,7 @@ export async function Cadastro(req, res) {
         await db.collection("users").insertOne(newUser);
         res.status(201).send(valid.error);
     }
-    else{
+    else {
         res.status(422).send(valid.error.details);
     }
 }
