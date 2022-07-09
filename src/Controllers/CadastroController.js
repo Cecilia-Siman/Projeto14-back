@@ -4,6 +4,9 @@ import jwt from 'jsonwebtoken'
 import { db } from '../dbMongo/Mongo.js'
 
 export async function Cadastro(req, res) {
+
+    console.log('entrou')
+
     const userSchema = joi.object({
         name: joi.string().required(),
         email: joi.string().required().email(),
@@ -11,12 +14,7 @@ export async function Cadastro(req, res) {
         passwordConfirm: joi.any().equal(joi.ref('password')).required().messages({ 'different password': 'password does not match' }),
     });
 
-    console.log(req.body)
-
-    const { name, email, password, passwordConfirm } = req.body
-
-    // const valid = userSchema.validate(req.body);
-    const valid = userSchema.validate({ name, email, password, passwordConfirm });
+    const valid = userSchema.validate(req.body);
     const repEmail = await db.collection("users").findOne({ email: req.body.email });
 
     if (!valid.error && !repEmail) {
