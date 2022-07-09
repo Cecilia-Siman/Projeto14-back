@@ -1,10 +1,10 @@
-import { ProdutosCarrinho } from '../Controllers/CarrinhoController.js'
-import { Router } from 'express'
+// import { ProdutosCarrinho } from '../Controllers/CarrinhoController.js'
+// import { Router } from 'express'
 
-const server = Router()
+// const server = Router()
 
 // server.post('/', LoginUsuario)
 
 // server.get('/', ProdutosCarrinho)
 
-export default server;
+// export default server;
