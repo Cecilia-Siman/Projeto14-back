@@ -15,7 +15,7 @@ export async function MostraCarrinho(req, res) {
         res.send(dados)
 
     } catch {
-        alert('seu token foi adulterado!')
+        alert('seu token foi adulterado ou passou da validade!')
         res.send(401)
     }
     // const produtosCarrinho = await db.collection("carrinho").find().toArray()
