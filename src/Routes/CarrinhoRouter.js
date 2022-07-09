@@ -5,6 +5,6 @@ const server = Router()
 
 // server.post('/', LoginUsuario)
 
-server.get('/', ProdutosCarrinho)
+// server.get('/', ProdutosCarrinho)
 
 export default server;
