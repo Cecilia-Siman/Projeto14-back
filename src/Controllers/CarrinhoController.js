@@ -19,7 +19,7 @@ export async function MostraCarrinho(req, res) {
         res.send(401)
     }
     const produtosCarrinho = await db.collection("carrinho").find().toArray()
-    res.send(produtosCarrinho)
+    res.send(dados)
 }
 
 
