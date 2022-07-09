@@ -3,6 +3,6 @@ import { Router } from 'express'
 
 const server = Router()
 
-server.post('/login', LoginUsuario)
+server.post('/', LoginUsuario)
 
 export default server;
