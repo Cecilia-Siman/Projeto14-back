@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import LoginRouter from './Routes/LoginRouter.js'
 import CarrinhoRouter from './Routes/CarrinhoRouter.js'
+import CadastroRouter from './Routes/CadastroRouter.js'
 
 dotenv.config();
 
@@ -10,7 +11,8 @@ const server = express();
 server.use(express.json());
 server.use(cors());
 
-server.use(LoginRouter)
+server.use(LoginRouter);
+server.use(CadastroRouter);
 
 server.use(CarrinhoRouter)
 
