@@ -33,7 +33,7 @@ export async function LoginUsuario(req, res) {
 
         const dados = { email, senha: existe.senha };
 
-        const autorizado = bcrypt.compareSync(senha, existe.senha)
+        const autorizado = bcrypt.compareSync(senha, existe.password)
 
         if (!autorizado) {
             return res.status(401).send('Dados inválidos')
