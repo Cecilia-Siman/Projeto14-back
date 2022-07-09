@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import LoginRouter from './Routes/LoginRouter.js'
-// import CarrinhoRouter from './Routes/CarrinhoRouter.js'
+import CarrinhoRouter from './Routes/CarrinhoRouter.js'
 import CadastroRouter from './Routes/CadastroRouter.js'
 
 dotenv.config();
@@ -14,7 +14,7 @@ server.use(cors());
 server.use(LoginRouter);
 server.use(CadastroRouter);
 
-// server.use(CarrinhoRouter)
+server.use(CarrinhoRouter)
 
 server.listen(process.env.PORT, () => {
     console.log("Server running on port " + process.env.PORT);
