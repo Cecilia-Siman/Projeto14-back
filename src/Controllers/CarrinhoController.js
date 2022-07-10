@@ -17,7 +17,7 @@ export async function MostraCarrinho(req, res) {
         res.send(dados)
 
     } catch {
-        alert('seu token foi adulterado ou passou da validade!')
+        // alert('seu token foi adulterado ou passou da validade!')
         res.send(401)
     }
 
