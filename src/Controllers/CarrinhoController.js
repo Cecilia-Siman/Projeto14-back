@@ -12,13 +12,15 @@ export async function MostraCarrinho(req, res) {
 
     try {
         const dados = jwt.verify(token, chaveSecreta);
-        res.send(dados)
+        const meUsuraio = await db.collection("online").find({ token: token }).toArray()
+        // const produtosCarrinho = await db.collection("carrinho").find({}).toArray()
+        res.send(meUsuraio)
 
     } catch {
         alert('seu token foi adulterado ou passou da validade!')
         res.send(401)
     }
-    // const produtosCarrinho = await db.collection("carrinho").find().toArray()
+
     // res.send(dados)
 }
 
@@ -31,8 +33,7 @@ export async function AdicionaCarrinho(req, res) {
 
     try {
         const produtosCarrinho = await db.collection("carrinho").insertOne(produto)
-        const meuCarrinho = await db.collection("carrinho").find().toArray()
-        res.send(meuCarrinho)
+        res.send('OK')
     }
     catch {
         res.status(501).send('Não foi possível verificar seu carrinho!')
