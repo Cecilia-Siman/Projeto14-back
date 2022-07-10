@@ -1,4 +1,5 @@
 import { db } from '../dbMongo/Mongo.js'
+import jwt from 'jsonwebtoken';
 
 async function validateUser(req, res, next) {
 

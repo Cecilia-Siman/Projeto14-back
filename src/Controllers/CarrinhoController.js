@@ -1,5 +1,4 @@
 import { db, objectId } from '../dbMongo/Mongo.js'
-import jwt from 'jsonwebtoken';
 
 // Mostra os itens do meu carrinho, ligados a minha conta
 export async function MostraCarrinho(req, res) {
