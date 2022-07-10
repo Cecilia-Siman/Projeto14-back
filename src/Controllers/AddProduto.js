@@ -55,8 +55,6 @@ export async function AddProduto(req, res) {
     //         estoque: []
     //     }
 
-    //     const galaxias = await db.collection("produtos").findOne({ galaxia });
-
     //     if (!galaxias) {
     //         await db.collection("produtos").insertOne(novaGalaxia);
     //         // return res.status(201).send('Adicionado nova galaxia');
@@ -75,5 +73,5 @@ export async function AddProduto(req, res) {
     // //     res.status(422).send(valid.error.details);
     // // }
 
-    res.send(galaxia)
+    res.send(galaxias)
 }
