@@ -52,7 +52,7 @@ export async function AddProduto(req, res) {
             estoque: []
         }
 
-        const galaxias = await db.collection("produtos").findOne({ galaxia: galaxia });
+        const galaxias = await db.collection("produtos").findOne({ galaxia });
 
         if (!galaxias) {
             await db.collection("produtos").insertOne(novaGalaxia);
