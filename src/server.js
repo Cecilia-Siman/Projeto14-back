@@ -16,6 +16,7 @@ server.use(LoginRouter);
 server.use(CadastroRouter);
 
 server.use(validateUser, CarrinhoRouter)
+server.use(CadastraProduto)
 
 server.listen(process.env.PORT, () => {
     console.log("Server running on port " + process.env.PORT);
