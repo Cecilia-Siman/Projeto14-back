@@ -37,13 +37,11 @@ export async function AddProduto(req, res) {
     //     ]
     // },
 
-    const { galaxia, nome, tipo, preco } = req.body
+    const { galaxia, nome } = req.body
 
     const userSchema = joi.object({
         galaxia: joi.string().required(),
-        nome: joi.string().required(),
-        tipo: joi.string().required(),
-        preco: joi.number().required()
+        nome: joi.string().required()
     });
 
     const valid = userSchema.validate({ galaxia, nome });
