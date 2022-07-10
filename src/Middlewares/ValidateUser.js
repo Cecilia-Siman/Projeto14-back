@@ -30,7 +30,7 @@ async function validateUser(req, res, next) {
         res.status(401).send('Erro na validação')
     }
 
-    next()
+    // next()
 }
 
 export default validateUser;
