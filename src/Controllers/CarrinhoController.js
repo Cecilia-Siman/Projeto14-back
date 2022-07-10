@@ -12,7 +12,7 @@ export async function MostraCarrinho(req, res) {
     try {
         const dados = jwt.verify(token, chaveSecreta);
         const meUsuraio = await db.collection("users").findOne({ email: dados.email })
-        const produtosCarrinho = await db.collection("carrinho").findOne({ idUser: objectId(meUsuraio._id) })
+        const produtosCarrinho = await db.collection("carrinho").find({ idUser: objectId(meUsuraio._id) }).toArray()
         res.send(produtosCarrinho)
 
     } catch {
