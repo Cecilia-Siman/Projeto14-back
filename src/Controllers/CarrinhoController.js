@@ -13,7 +13,7 @@ export async function MostraCarrinho(req, res) {
         const dados = jwt.verify(token, chaveSecreta);
         const meUsuraio = await db.collection("users").find({ email: dados.email }).toArray()
         const idUser = objectId(meUsuraio._id)
-        const produtosCarrinho = await db.collection("carrinho").find({ idUser: idUser }).toArray()
+        const produtosCarrinho = await db.collection("carrinho").find().toArray()
         res.send(produtosCarrinho)
 
     } catch {
