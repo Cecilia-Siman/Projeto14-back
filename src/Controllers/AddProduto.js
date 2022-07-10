@@ -40,7 +40,10 @@ export async function AddProduto(req, res) {
     const { galaxia } = req.body
 
     const userSchema = joi.object({
-        galaxia: joi.string().required()
+        galaxia: joi.string().required(),
+        nome: joi.string().required(),
+        tipo: joi.string().required(),
+        preco: joi.number().required()
     });
 
     const valid = userSchema.validate(req.body);
@@ -56,9 +59,17 @@ export async function AddProduto(req, res) {
 
         if (!galaxias) {
             await db.collection("produtos").insertOne(novaGalaxia);
-            return res.status(201).send('Adicionado nova galaxia');
+            // return res.status(201).send('Adicionado nova galaxia');
         }
-        return res.status(200).send(galaxias)
+
+        const novoProduto = {
+            nome,
+            tipo,
+            preco
+        }
+        const estoque = galaxias.estoque
+        const novoEstoque = estoque.push(novoProduto)
+        return res.status(200).send(novoEstoque)
     }
     // else {
     //     res.status(422).send(valid.error.details);
