@@ -4,36 +4,29 @@ import jwt from 'jsonwebtoken';
 // Mostra os itens do meu carrinho, ligados a minha conta
 export async function MostraCarrinho(req, res) {
 
-    const { authorization } = req.headers
+    const dados = res.locals.dados
 
-    const token = authorization?.replace('Bearer ', '')
-
-    const chaveSecreta = process.env.JWT_SECRET;
+    const body = res.locals.body
 
     try {
-        const dados = jwt.verify(token, chaveSecreta);
+
         const meUsuraio = await db.collection("users").findOne({ email: dados.email })
         const produtosCarrinho = await db.collection("carrinho").find({ idUser: objectId(meUsuraio._id) }).toArray()
         res.send(produtosCarrinho)
 
     } catch {
-        res.status(401).send('Seu token foi adulterado ou passou da validade!')
+        res.status(401).send('Usuário não encontrado!')
     }
 }
 
 // Adiciona o produto escolhido no carrinho com o id do meu usuário
 export async function AdicionaCarrinho(req, res) {
 
-    const { authorization } = req.headers
+    const dados = res.locals.dados
 
-    const token = authorization?.replace('Bearer ', '')
-
-    const chaveSecreta = process.env.JWT_SECRET;
-
-    const produto = req.body
+    const produto = res.locals.body
 
     try {
-        const dados = jwt.verify(token, chaveSecreta);
         const meUsuraio = await db.collection("users").findOne({ email: dados.email })
         const idUser = objectId(meUsuraio._id)
         const produtoAdicionado = { ...produto, idUser: idUser }
