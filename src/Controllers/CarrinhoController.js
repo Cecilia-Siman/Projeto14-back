@@ -7,15 +7,15 @@ export async function MostraCarrinho(req, res) {
 
     const body = res.locals.body
 
-    // try {
+    try {
 
-    //     const meUsuraio = await db.collection("users").findOne({ email: dados.email })
-    //     const produtosCarrinho = await db.collection("carrinho").find({ idUser: objectId(meUsuraio._id) }).toArray()
-    //     res.send(produtosCarrinho)
+        const meUsuraio = await db.collection("users").findOne({ email: dados.email })
+        const produtosCarrinho = await db.collection("carrinho").find({ idUser: objectId(meUsuraio._id) }).toArray()
+        res.send(produtosCarrinho)
 
-    // } catch {
-    //     res.status(401).send('Usuário não encontrado!')
-    // }
+    } catch {
+        res.status(401).send('Usuário não encontrado!')
+    }
     res.send(dados)
 }
 
