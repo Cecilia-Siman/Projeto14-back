@@ -66,7 +66,7 @@ export async function AddProduto(req, res) {
             preco
         }
         const estoque = galaxias.estoque
-        const novoEstoque = estoque.push(novoProduto)
+        let novoEstoque = [...estoque, novoProduto]
         return res.send(novoProduto)
     }
     // // else {
