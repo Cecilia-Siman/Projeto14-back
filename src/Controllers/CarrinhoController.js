@@ -8,15 +8,16 @@ export async function MostraCarrinho(req, res) {
 
     const body = res.locals.body
 
-    try {
+    // try {
 
-        const meUsuraio = await db.collection("users").findOne({ email: dados.email })
-        const produtosCarrinho = await db.collection("carrinho").find({ idUser: objectId(meUsuraio._id) }).toArray()
-        res.send(produtosCarrinho)
+    //     const meUsuraio = await db.collection("users").findOne({ email: dados.email })
+    //     const produtosCarrinho = await db.collection("carrinho").find({ idUser: objectId(meUsuraio._id) }).toArray()
+    //     res.send(produtosCarrinho)
 
-    } catch {
-        res.status(401).send('Usuário não encontrado!')
-    }
+    // } catch {
+    //     res.status(401).send('Usuário não encontrado!')
+    // }
+    res.send(dados)
 }
 
 // Adiciona o produto escolhido no carrinho com o id do meu usuário
@@ -26,15 +27,16 @@ export async function AdicionaCarrinho(req, res) {
 
     const produto = res.locals.body
 
-    try {
-        const meUsuraio = await db.collection("users").findOne({ email: dados.email })
-        // const idUser = objectId(meUsuraio._id)
-        // const produtoAdicionado = { ...produto, idUser: idUser }
-        // await db.collection("carrinho").insertOne(produtoAdicionado)
-        // const produtosCarrinho = await db.collection("carrinho").find().toArray()
-        res.send(meUsuraio)
-    }
-    catch {
-        res.status(501).send('Não foi possível verificar seu carrinho!')
-    }
+    // try {
+    //     const meUsuraio = await db.collection("users").findOne({ email: dados.email })
+    //     // const idUser = objectId(meUsuraio._id)
+    //     // const produtoAdicionado = { ...produto, idUser: idUser }
+    //     // await db.collection("carrinho").insertOne(produtoAdicionado)
+    //     // const produtosCarrinho = await db.collection("carrinho").find().toArray()
+    //     res.send(meUsuraio)
+    // }
+    // catch {
+    //     res.status(501).send('Não foi possível verificar seu carrinho!')
+    // }
+    res.send(produto)
 }
