@@ -67,7 +67,21 @@ export async function AddProduto(req, res) {
         }
         const estoque = galaxias.estoque
         let novoEstoque = [...estoque, novoProduto]
-        return res.send(novoEstoque)
+
+        try {
+            await db.collection("produtos").updateOne(
+                { galaxia },
+                {
+                    $set: {
+                        estoque: novoEstoque
+                    }
+                }
+            );
+            return res.send('deu certo')
+        }
+        catch {
+            return res.send('deu merda na atualização')
+        }
     }
     // // else {
     // //     res.status(422).send(valid.error.details);
