@@ -37,7 +37,7 @@ export async function AddProduto(req, res) {
     //     ]
     // },
 
-    const body = req.body
+    const { galaxia, nome } = req.body
 
     const userSchema = joi.object({
         galaxia: joi.string().required(),
@@ -46,32 +46,32 @@ export async function AddProduto(req, res) {
 
     const valid = userSchema.validate(req.body);
 
-    if (!valid.error) {
+    // if (!valid.error) {
 
-        const novaGalaxia = {
-            galaxia: body.galaxia,
-            estoque: []
-        }
+    //     const novaGalaxia = {
+    //         galaxia: body.galaxia,
+    //         estoque: []
+    //     }
 
-        const galaxias = await db.collection("produtos").findOne({ galaxia });
+    //     const galaxias = await db.collection("produtos").findOne({ galaxia });
 
-        if (!galaxias) {
-            await db.collection("produtos").insertOne(novaGalaxia);
-            // return res.status(201).send('Adicionado nova galaxia');
-        }
+    //     if (!galaxias) {
+    //         await db.collection("produtos").insertOne(novaGalaxia);
+    //         // return res.status(201).send('Adicionado nova galaxia');
+    //     }
 
-        // const novoProduto = {
-        //     nome,
-        //     tipo,
-        //     preco
-        // }
-        // const estoque = galaxias.estoque
-        // const novoEstoque = estoque.push(novoProduto)
-        return res.send(body)
-    }
-    // else {
-    //     res.status(422).send(valid.error.details);
+    //     // const novoProduto = {
+    //     //     nome,
+    //     //     tipo,
+    //     //     preco
+    //     // }
+    //     // const estoque = galaxias.estoque
+    //     // const novoEstoque = estoque.push(novoProduto)
+    //     return res.send(body)
     // }
+    // // else {
+    // //     res.status(422).send(valid.error.details);
+    // // }
 
-    res.send(body)
+    res.send(req.body)
 }
