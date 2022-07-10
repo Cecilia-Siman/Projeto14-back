@@ -1,6 +1,7 @@
 import { db, objectId } from '../dbMongo/Mongo.js'
 import jwt from 'jsonwebtoken';
 
+// Mostra os itens do meu carrinho, ligados a minha conta
 export async function MostraCarrinho(req, res) {
 
     const { authorization } = req.headers
@@ -16,14 +17,11 @@ export async function MostraCarrinho(req, res) {
         res.send(produtosCarrinho)
 
     } catch {
-        // alert('seu token foi adulterado ou passou da validade!')
         res.status(401).send('Seu token foi adulterado ou passou da validade!')
     }
-
-    // res.send(dados)
 }
 
-
+// Adiciona o produto escolhido no carrinho com o id do meu usuário
 export async function AdicionaCarrinho(req, res) {
 
     const { authorization } = req.headers
