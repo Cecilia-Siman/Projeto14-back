@@ -46,7 +46,7 @@ export async function AddProduto(req, res) {
 
     const valid = userSchema.validate({ galaxia, nome });
 
-    const galaxias = await db.collection("produtos").findOne({ galaxia });
+    // const galaxias = await db.collection("produtos").findOne({ galaxia });
 
     if (valid) {
 
@@ -65,13 +65,13 @@ export async function AddProduto(req, res) {
         //     //     tipo,
         //     //     preco
         //     // }
-        const estoque = galaxias.estoque
+        // const estoque = galaxias.estoque
         //     // const novoEstoque = estoque.push(novoProduto)
-        return res.send(estoque)
+        return res.send(galaxia)
     }
     // // else {
     // //     res.status(422).send(valid.error.details);
     // // }
 
-    res.send(galaxias)
+    res.send(galaxia)
 }
