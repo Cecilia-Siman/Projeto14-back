@@ -1,4 +1,4 @@
-import { AddProduto } from '../Controllers/AddProduto'
+import { AddProduto } from '../Controllers/AddProduto.js'
 import { Router } from 'express'
 
 const server = Router()
