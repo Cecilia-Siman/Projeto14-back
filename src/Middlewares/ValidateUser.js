@@ -5,6 +5,8 @@ async function validateUser(req, res, next) {
 
     const { authorization } = req.headers
 
+    const chaveSecreta = process.env.JWT_SECRET;
+
     const token = authorization?.replace('Bearer ', '')
 
     const dados = jwt.verify(token, chaveSecreta);
