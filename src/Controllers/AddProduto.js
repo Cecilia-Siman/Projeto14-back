@@ -73,5 +73,5 @@ export async function AddProduto(req, res) {
     // //     res.status(422).send(valid.error.details);
     // // }
 
-    res.send(req.body)
+    res.send(galaxia)
 }
