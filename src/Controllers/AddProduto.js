@@ -46,6 +46,8 @@ export async function AddProduto(req, res) {
 
     const valid = userSchema.validate(req.body);
 
+    const galaxias = await db.collection("produtos").findOne({ galaxia });
+
     // if (!valid.error) {
 
     //     const novaGalaxia = {
@@ -73,5 +75,5 @@ export async function AddProduto(req, res) {
     // //     res.status(422).send(valid.error.details);
     // // }
 
-    res.send(galaxia)
+    res.send(galaxias)
 }
