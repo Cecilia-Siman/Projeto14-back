@@ -13,11 +13,11 @@ const server = express();
 server.use(express.json());
 server.use(cors());
 
+server.use(AddProdutoRouter)
 server.use(LoginRouter);
 server.use(CadastroRouter);
 
 server.use(validateUser, CarrinhoRouter)
-server.use(AddProdutoRouter)
 
 server.listen(process.env.PORT, () => {
     console.log("Server running on port " + process.env.PORT);
