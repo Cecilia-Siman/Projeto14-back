@@ -67,7 +67,7 @@ export async function AddProduto(req, res) {
         }
         const estoque = galaxias.estoque
         let novoEstoque = [...estoque, novoProduto]
-        return res.send(novoProduto)
+        return res.send(novoEstoque)
     }
     // // else {
     // //     res.status(422).send(valid.error.details);
