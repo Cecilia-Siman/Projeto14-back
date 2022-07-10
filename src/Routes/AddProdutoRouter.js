@@ -1,8 +1,8 @@
-import { Cadastro } from '../Controllers/CadastroController.js'
+import { AddProduto } from '../Controllers/AddProduto'
 import { Router } from 'express'
 
 const server = Router()
 
-server.post('/produtos', CadastraProduto);
+server.post('/produtos', AddProduto);
 
 export default server;
