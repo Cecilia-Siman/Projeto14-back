@@ -40,7 +40,8 @@ export async function AddProduto(req, res) {
     const body = req.body
 
     const userSchema = joi.object({
-        galaxia: joi.string().required()
+        galaxia: joi.string().required(),
+        nome: joi.string().required()
     });
 
     const valid = userSchema.validate(req.body);
@@ -66,7 +67,7 @@ export async function AddProduto(req, res) {
         // }
         // const estoque = galaxias.estoque
         // const novoEstoque = estoque.push(novoProduto)
-        return res.send(200)
+        return res.send(body)
     }
     // else {
     //     res.status(422).send(valid.error.details);
