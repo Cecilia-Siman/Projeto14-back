@@ -13,28 +13,24 @@ async function validateUser(req, res, next) {
 
     const body = req.body
 
-    // try {
+    try {
 
-    //     const chaveSecreta = process.env.JWT_SECRET;
+        const verificationToken = await db.collection("online").findOne({
+            token
+        })
 
-    //     const dados = jwt.verify(token, chaveSecreta);
+        if (!verificationToken) {
+            return res.status(401).send('Esse token não está online');
+        }
 
-    //     const verificationToken = await db.collection("online").findOne({
-    //         token
-    //     })
+        res.locals.dados = dados
+        res.locals.body = body
 
-    //     if (!verificationToken) {
-    //         return res.status(401).send('Esse token não está online');
-    //     }
-
-    //     res.locals.dados = dados
-    //     res.locals.body = body
-    // }
-    // catch {
-    //     res.status(401).send('Erro na validação')
-    // }
-
-    res.status(200).send(dados)
+        res.status(200).send('Deu bom!')
+    }
+    catch {
+        res.status(401).send('Erro na validação')
+    }
 
     next()
 }
