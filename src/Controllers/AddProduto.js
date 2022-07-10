@@ -58,7 +58,7 @@ export async function AddProduto(req, res) {
             await db.collection("produtos").insertOne(novaGalaxia);
             return res.status(201).send('Adicionado nova galaxia');
         }
-        return res.status(422).send('Essa galaxia ja existe')
+        return res.status(200).send(galaxias)
     }
     // else {
     //     res.status(422).send(valid.error.details);
