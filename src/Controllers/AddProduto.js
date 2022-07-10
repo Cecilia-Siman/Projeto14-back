@@ -78,7 +78,9 @@ export async function AddProduto(req, res) {
                     }
                 }
             );
-            return res.send(galaxias)
+
+            const galaxiaAtualizada = await db.collection("produtos").findOne({ galaxia });
+            return res.send(galaxiaAtualizada)
         }
         catch {
             return res.send('deu merda na atualização')
