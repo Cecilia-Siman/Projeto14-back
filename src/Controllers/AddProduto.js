@@ -46,7 +46,7 @@ export async function AddProduto(req, res) {
 
     const valid = userSchema.validate({ galaxia, nome });
 
-    const galaxias = await db.collection("produtos").findOne({ galaxia });
+    // const galaxias = await db.collection("produtos").findOne({ galaxia });
 
     // if (!valid.error) {
 
@@ -75,5 +75,5 @@ export async function AddProduto(req, res) {
     // //     res.status(422).send(valid.error.details);
     // // }
 
-    res.send(galaxias)
+    res.send(galaxia)
 }
