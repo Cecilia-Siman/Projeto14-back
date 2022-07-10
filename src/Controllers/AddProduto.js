@@ -45,27 +45,27 @@ export async function AddProduto(req, res) {
 
     const valid = userSchema.validate(req.body);
 
-    // if (!valid.error) {
+    if (!valid.error) {
 
-    //     const novaGalaxia = {
-    //         galaxia,
-    //         estoque: []
-    //     }
+        const novaGalaxia = {
+            galaxia,
+            estoque: []
+        }
 
-    //     const galaxias = await db.collection("produtos").findOne({ galaxia: galaxia });
+        const galaxias = await db.collection("produtos").findOne({ galaxia: galaxia });
 
-    //     if (!galaxias) {
-    //         await db.collection("produtos").insertOne(novaGalaxia);
-    //         res.status(201).send('Adicionado nova galaxia');
-    //     }
-    //     else {
-    //         await db.collection("produtos").insertOne(novoProduto);
-    //         res.status(422).send('Essa galaxia ja existe')
-    //     }
-    // }
+        if (!galaxias) {
+            await db.collection("produtos").insertOne(novaGalaxia);
+            return res.status(201).send('Adicionado nova galaxia');
+        }
+        else {
+            await db.collection("produtos").insertOne(novoProduto);
+            return res.status(422).send('Essa galaxia ja existe')
+        }
+    }
     // else {
     //     res.status(422).send(valid.error.details);
     // }
 
-    res.send(valid)
+    res.send('Não passou no if')
 }
