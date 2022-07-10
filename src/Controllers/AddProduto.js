@@ -60,14 +60,14 @@ export async function AddProduto(req, res) {
         //     // return res.status(201).send('Adicionado nova galaxia');
         // }
 
-        //     // const novoProduto = {
-        //     //     nome,
-        //     //     tipo,
-        //     //     preco
-        //     // }
-        // const estoque = galaxias.estoque
-        //     // const novoEstoque = estoque.push(novoProduto)
-        return res.send(galaxias)
+        const novoProduto = {
+            nome,
+            tipo,
+            preco
+        }
+        const estoque = galaxias.estoque
+        const novoEstoque = estoque.push(novoProduto)
+        return res.send(novoProduto)
     }
     // // else {
     // //     res.status(422).send(valid.error.details);
