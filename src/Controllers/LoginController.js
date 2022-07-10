@@ -39,7 +39,7 @@ export async function LoginUsuario(req, res) {
             return res.status(401).send('Dados inválidos')
         }
 
-        const configuracoes = { expiresIn: 60 * 5 }
+        const configuracoes = { expiresIn: 60 * 10 }
 
         const token = jwt.sign(dados, chaveSecreta, configuracoes);
 
