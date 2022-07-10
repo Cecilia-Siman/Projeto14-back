@@ -2,12 +2,13 @@ import { db } from '../dbMongo/Mongo.js'
 
 async function validateUser(req, res, next) {
 
+    const { authorization } = req.headers
+
+    const body = req.body
+
+    const token = authorization?.replace('Bearer ', '')
+
     try {
-        const { authorization } = req.headers
-
-        const body = req.body
-
-        const token = authorization?.replace('Bearer ', '')
 
         const chaveSecreta = process.env.JWT_SECRET;
 
@@ -25,7 +26,7 @@ async function validateUser(req, res, next) {
         res.locals.body = body
     }
     catch {
-        res.status(401).send('Esse token não é valido')
+        res.status(401).send('Erro na validação')
     }
 
     next()
