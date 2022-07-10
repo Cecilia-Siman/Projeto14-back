@@ -37,33 +37,33 @@ export async function AddProduto(req, res) {
     //     ]
     // },
 
-    const { galaxia, imagem, nome, tipo, preco, descricao } = req.body
+    const { galaxia } = req.body
 
     const userSchema = joi.object({
-        galaxia: joi.string().required(),
-        imagem: joi.string().required(),
-        nome: joi.string().required(),
-        tipo: joi.string().required(),
-        preco: joi.string().required(),
-        descricao: joi.string().required()
+        galaxia: joi.string().required()
     });
 
     const valid = userSchema.validate(req.body);
 
     if (!valid.error) {
 
-        const novoProduto = {
-            imagem,
-            nome,
-            tipo,
-            preco,
-            descricao
-        };
+        // const novoProduto = {
+        //     imagem,
+        //     nome,
+        //     tipo,
+        //     preco,
+        //     descricao
+        // };
+
+        const novaGalaxia = {
+            galaxia,
+            estoque: []
+        }
 
         const galaxias = await db.collection("produtos").findOne({ galaxia: galaxia });
 
         if (!galaxias) {
-            await db.collection("produtos").insertOne(novoProduto);
+            await db.collection("produtos").insertOne(novaGalaxia);
             res.status(201).send('Adicionado nova galaxia');
         }
         else {
