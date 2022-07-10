@@ -55,10 +55,10 @@ export async function AddProduto(req, res) {
         //         estoque: []
         //     }
 
-        if (!galaxias) {
-            await db.collection("produtos").insertOne(novaGalaxia);
-            // return res.status(201).send('Adicionado nova galaxia');
-        }
+        // if (!galaxias) {
+        //     await db.collection("produtos").insertOne(novaGalaxia);
+        //     // return res.status(201).send('Adicionado nova galaxia');
+        // }
 
         //     // const novoProduto = {
         //     //     nome,
