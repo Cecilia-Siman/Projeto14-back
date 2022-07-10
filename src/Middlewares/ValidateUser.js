@@ -13,24 +13,25 @@ async function validateUser(req, res, next) {
 
     const body = req.body
 
-    try {
+    // try {
 
-        const verificationToken = await db.collection("online").findOne({
-            token
-        })
+    //     const verificationToken = await db.collection("online").findOne({
+    //         token
+    //     })
 
-        if (!verificationToken) {
-            return res.status(401).send('Esse token não está online');
-        }
+    //     if (!verificationToken) {
+    //         return res.status(401).send('Esse token não está online');
+    //     }
 
-        res.locals.dados = dados
-        res.locals.body = body
-    }
-    catch {
-        res.status(401).send('Erro na validação')
-    }
+    //     res.locals.dados = dados
+    //     res.locals.body = body
+    //     res.send(500)
+    // }
+    // catch {
+    //     res.status(401).send('Erro na validação')
+    // }
 
-    // next()
+    next()
 }
 
 export default validateUser;
