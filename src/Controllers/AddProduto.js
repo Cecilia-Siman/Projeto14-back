@@ -48,27 +48,27 @@ export async function AddProduto(req, res) {
 
     const galaxias = await db.collection("produtos").findOne({ galaxia });
 
-    // if (!valid.error) {
+    if (valid) {
 
-    //     const novaGalaxia = {
-    //         galaxia: body.galaxia,
-    //         estoque: []
-    //     }
+        //     const novaGalaxia = {
+        //         galaxia: body.galaxia,
+        //         estoque: []
+        //     }
 
-    //     if (!galaxias) {
-    //         await db.collection("produtos").insertOne(novaGalaxia);
-    //         // return res.status(201).send('Adicionado nova galaxia');
-    //     }
+        if (!galaxias) {
+            await db.collection("produtos").insertOne(novaGalaxia);
+            // return res.status(201).send('Adicionado nova galaxia');
+        }
 
-    //     // const novoProduto = {
-    //     //     nome,
-    //     //     tipo,
-    //     //     preco
-    //     // }
-    //     // const estoque = galaxias.estoque
-    //     // const novoEstoque = estoque.push(novoProduto)
-    //     return res.send(body)
-    // }
+        //     // const novoProduto = {
+        //     //     nome,
+        //     //     tipo,
+        //     //     preco
+        //     // }
+        const estoque = galaxias.estoque
+        //     // const novoEstoque = estoque.push(novoProduto)
+        return res.send(estoque)
+    }
     // // else {
     // //     res.status(422).send(valid.error.details);
     // // }
