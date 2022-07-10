@@ -25,8 +25,6 @@ async function validateUser(req, res, next) {
 
         res.locals.dados = dados
         res.locals.body = body
-
-        res.status(200).send('Deu bom!')
     }
     catch {
         res.status(401).send('Erro na validação')
