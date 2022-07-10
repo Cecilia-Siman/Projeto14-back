@@ -14,7 +14,7 @@ export async function MostraCarrinho(req, res) {
         const meUsuraio = await db.collection("users").find({ email: dados.email }).toArray()
         const idUser = objectId(meUsuraio._id)
         const produtosCarrinho = await db.collection("carrinho").findOne({ idUser: idUser })
-        res.send(produtosCarrinho)
+        res.send(idUser)
 
     } catch {
         // alert('seu token foi adulterado ou passou da validade!')
