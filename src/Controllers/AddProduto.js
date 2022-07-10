@@ -37,7 +37,7 @@ export async function AddProduto(req, res) {
     //     ]
     // },
 
-    const { galaxia } = req.body
+    const { galaxia, nome, tipo, preco } = req.body
 
     const userSchema = joi.object({
         galaxia: joi.string().required(),
