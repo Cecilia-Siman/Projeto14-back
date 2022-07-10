@@ -77,7 +77,7 @@ export async function AddProduto(req, res) {
                     }
                 }
             );
-            return res.send('deu certo')
+            return res.send(galaxias)
         }
         catch {
             return res.send('deu merda na atualização')
