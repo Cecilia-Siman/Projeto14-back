@@ -57,7 +57,7 @@ export async function AddProduto(req, res) {
             estoque: []
         }
         const adicionaGalaxia = await db.collection("produtos").insertOne(novaGalaxia)
-        return res.send(adicionaGalaxia)
+        return res.send(galaxias)
     }
 
     // if (valid) {
