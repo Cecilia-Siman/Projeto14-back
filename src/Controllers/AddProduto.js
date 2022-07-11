@@ -48,7 +48,7 @@ export async function AddProduto(req, res) {
 
     const galaxias = await db.collection("produtos").findOne({ galaxia })
 
-    if (galaxias === null) {
+    if (galaxias) {
         // if (valid) {
 
         //     //     const novoProduto = {
