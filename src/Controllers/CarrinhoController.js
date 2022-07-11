@@ -56,7 +56,11 @@ export async function RemoveCarrinho(req, res) {
         //         $or: [{ nome: produto.nome }, { idUser: idUser }]
         //     }
         // )
-        const produtApagar = await db.collection("carrinho").findOne({ idUser: objectId(meUsuraio._id) })
+        const produtApagar = await db.collection("carrinho").findOne(
+            {
+                $and: [{ nome: produto.nome }, { idUser: objectId(meUsuraio._id) }]
+            }
+        )
         return res.send(produtApagar)
     }
     catch {
