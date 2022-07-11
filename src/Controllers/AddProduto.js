@@ -48,17 +48,17 @@ export async function AddProduto(req, res) {
 
     const galaxias = await db.collection("produtos").findOne({ galaxia });
 
+    // const novaGalaxia = {
+    //     galaxia: body.galaxia,
+    //     estoque: []
+    // }
+
+    // if (!galaxias) {
+    //     await db.collection("produtos").insertOne(novaGalaxia);
+    //     // return res.status(201).send('Adicionado nova galaxia');
+    // }
+
     if (valid) {
-
-        const novaGalaxia = {
-            galaxia: body.galaxia,
-            estoque: []
-        }
-
-        if (!galaxias) {
-            await db.collection("produtos").insertOne(novaGalaxia);
-            // return res.status(201).send('Adicionado nova galaxia');
-        }
 
         const novoProduto = {
             nome,
