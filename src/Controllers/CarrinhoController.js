@@ -47,11 +47,11 @@ export async function RemoveCarrinho(req, res) {
     const produto = res.locals.body
 
     try {
-        // const meUsuraio = await db.collection("users").findOne({ email: dados.email })
-        // const idUser = objectId(meUsuraio._id)
+        const meUsuraio = await db.collection("users").findOne({ email: dados.email })
+        const idUser = objectId(meUsuraio._id)
         // const produtoAdicionado = { ...produto, idUser: idUser }
         // await db.collection("carrinho").insertOne(produtoAdicionado)
-        await db.collection("carrinho").deleteMany({})
+        await db.collection("carrinho").deleteMany({ idUser })
         res.send('Apagado')
     }
     catch {

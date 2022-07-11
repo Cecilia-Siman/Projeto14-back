@@ -37,40 +37,70 @@ export async function AddProduto(req, res) {
     //     ]
     // },
 
-    const { galaxia, nome } = req.body
+    const { galaxia, nome, tipo, preco, descricao, imagem } = req.body
 
     const userSchema = joi.object({
-        galaxia: joi.string().required()
+        galaxia: joi.string().required(),
+        nome: joi.string().required()
     });
 
-    const valid = userSchema.validate(req.body);
+    const valid = userSchema.validate({ galaxia, nome });
 
-    if (!valid.error) {
+    const galaxias = await db.collection("produtos").findOne({ galaxia })
 
-        const novaGalaxia = {
-            galaxia,
-            estoque: []
+    if (valid) {
+        if (galaxias) {
+
+            const novoProduto = {
+                nome,
+                tipo,
+                preco,
+                descricao,
+                imagem
+            }
+            const estoque = galaxias.estoque
+            let novoEstoque = [...estoque, novoProduto]
+
+            try {
+                await db.collection("produtos").updateOne(
+                    { galaxia },
+                    {
+                        $set: {
+                            estoque: novoEstoque
+                        }
+                    }
+                );
+
+                const galaxiaAtualizada = await db.collection("produtos").findOne({ galaxia });
+                return res.send(galaxiaAtualizada)
+            }
+            catch {
+                return res.send('deu merda na atualização')
+            }
         }
-
-        const galaxias = await db.collection("produtos").findOne({ galaxia });
-
-        if (!galaxias) {
-            await db.collection("produtos").insertOne(novaGalaxia);
-            // return res.status(201).send('Adicionado nova galaxia');
+        else {
+            const novaGalaxia = {
+                galaxia: galaxia,
+                estoque: []
+            }
+            const adicionaGalaxia = await db.collection("produtos").insertOne(novaGalaxia)
+            return res.send('Gaalaxia adicionada')
         }
-
-        // const novoProduto = {
-        //     nome,
-        //     tipo,
-        //     preco
-        // }
-        // const estoque = galaxias.estoque
-        // const novoEstoque = estoque.push(novoProduto)
-        return res.send(200)
+    } else {
+        return res.send(404)
     }
-    // else {
-    //     res.status(422).send(valid.error.details);
-    // }
 
-    res.send('Não passou no if')
+    // await db.collection("produtos").deleteMany({})
+    // res.send('Apagado!')
+}
+
+export async function MostraProduto(req, res) {
+
+    try {
+        const galaxias = await db.collection("produtos").find().toArray()
+        return res.status(200).send(galaxias)
+    }
+    catch {
+        res.status(500).send('Não achamos os produtos')
+    }
 }
