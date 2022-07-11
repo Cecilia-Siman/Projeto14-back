@@ -29,9 +29,20 @@ export async function AdicionaCarrinho(req, res) {
         const meUsuraio = await db.collection("users").findOne({ email: dados.email })
         const idUser = objectId(meUsuraio._id)
         const produtoAdicionado = { ...produto, idUser: idUser }
-        await db.collection("carrinho").insertOne(produtoAdicionado)
-        const produtosCarrinho = await db.collection("carrinho").find().toArray()
-        res.send(meUsuraio)
+        const existeProduto = await db.collection("carrinho").find(
+            {
+                $and: [{ nome: produto.nome }, { idUser: objectId(meUsuraio._id) }]
+            }
+        ).toArray()
+        if (existeProduto.length === 0) {
+            await db.collection("carrinho").insertOne(produtoAdicionado)
+            const produtosCarrinho = await db.collection("carrinho").find().toArray()
+            return res.send(produtosCarrinho)
+        }
+        else {
+            return res.send('Produto já está no carrinho')
+        }
+
     }
     catch {
         res.status(501).send('Não foi possível verificar seu carrinho!')
@@ -51,11 +62,6 @@ export async function RemoveCarrinho(req, res) {
         const idUser = objectId(meUsuraio._id)
         // const produtoAdicionado = { ...produto, idUser: idUser }
         // await db.collection("carrinho").insertOne(produtoAdicionado)
-        // const produtApagar = await db.collection("carrinho").find(
-        //     {
-        //         $or: [{ nome: produto.nome }, { idUser: idUser }]
-        //     }
-        // )
         const produtApagar = await db.collection("carrinho").deleteOne(
             {
                 $and: [{ nome: produto.nome }, { idUser: objectId(meUsuraio._id) }]
