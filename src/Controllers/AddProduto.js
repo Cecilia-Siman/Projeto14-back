@@ -46,7 +46,7 @@ export async function AddProduto(req, res) {
 
     const valid = userSchema.validate({ galaxia, nome });
 
-    const galaxias = await db.collection("produtos").find({ galaxia });
+    const galaxias = await db.collection("produtos").findOne({ galaxia });
 
     // const novaGalaxia = {
     //     galaxia: body.galaxia,
@@ -91,5 +91,7 @@ export async function AddProduto(req, res) {
     //     res.status(422).send(valid.error.details);
     // }
 
-    res.send(galaxias)
+    const estoque = galaxias.estoque
+
+    return res.send(estoque)
 }
