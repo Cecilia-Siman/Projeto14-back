@@ -80,7 +80,7 @@ export async function AddProduto(req, res) {
         //     // else {
         //     //     res.status(422).send(valid.error.details);
         // }
-        return res.send(galaxias)
+        return res.send('ja existe')
     }
     else {
         const novaGalaxia = {
