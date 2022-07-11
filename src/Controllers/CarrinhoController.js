@@ -40,7 +40,7 @@ export async function AdicionaCarrinho(req, res) {
             return res.send(produtosCarrinho)
         }
         else {
-            return res.send('Produto já está no carrinho')
+            return res.status(422).send('Produto já está no carrinho')
         }
 
     }
