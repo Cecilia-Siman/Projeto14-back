@@ -48,50 +48,35 @@ export async function AddProduto(req, res) {
 
     const galaxias = await db.collection("produtos").findOne({ galaxia });
 
-    // const novaGalaxia = {
-    //     galaxia: body.galaxia,
-    //     estoque: []
-    // }
+    if (valid) {
 
-    // if (!galaxias) {
-    //     //     await db.collection("produtos").insertOne(novaGalaxia);
-    //     //     // return res.status(201).send('Adicionado nova galaxia');
-    //     return res.send('nao existe essa galaxia')
-    // }
+        const novoProduto = {
+            nome,
+            tipo,
+            preco,
+            descricao
+        }
+        const estoque = galaxias.estoque
+        let novoEstoque = [...estoque, novoProduto]
 
-    // if (valid) {
+        try {
+            await db.collection("produtos").updateOne(
+                { galaxia },
+                {
+                    $set: {
+                        estoque: novoEstoque
+                    }
+                }
+            );
 
-    //     const novoProduto = {
-    //         nome,
-    //         tipo,
-    //         preco,
-    //         descricao
-    //     }
-    //     const estoque = galaxias.estoque
-    //     let novoEstoque = [...estoque, novoProduto]
-
-    //     try {
-    //         await db.collection("produtos").updateOne(
-    //             { galaxia },
-    //             {
-    //                 $set: {
-    //                     estoque: novoEstoque
-    //                 }
-    //             }
-    //         );
-
-    //         const galaxiaAtualizada = await db.collection("produtos").findOne({ galaxia });
-    //         return res.send(galaxiaAtualizada)
-    //     }
-    //     catch {
-    //         return res.send('deu merda na atualização')
-    //     }
-    // }
-    // else {
-    //     res.status(422).send(valid.error.details);
-    // }
-
-    const estoque = galaxias.estoque
-
-    return res.send(estoque)
+            const galaxiaAtualizada = await db.collection("produtos").findOne({ galaxia });
+            return res.send(galaxiaAtualizada)
+        }
+        catch {
+            return res.send('deu merda na atualização')
+        }
+    }
+    else {
+        res.status(422).send(valid.error.details);
+    }
 }
