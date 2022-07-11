@@ -46,7 +46,7 @@ export async function AddProduto(req, res) {
 
     const valid = userSchema.validate({ galaxia, nome });
 
-    const galaxias = await db.collection("produtos").find({ galaxia })
+    const galaxias = await db.collection("produtos").findOne({ galaxia })
 
     if (galaxias.estoque) {
         return res.send('existe alguma')
