@@ -37,7 +37,7 @@ export async function AddProduto(req, res) {
     //     ]
     // },
 
-    const { galaxia, nome, tipo, preco, descricao,imagem } = req.body
+    const { galaxia, nome, tipo, preco, descricao, imagem } = req.body
 
     const userSchema = joi.object({
         galaxia: joi.string().required(),
@@ -92,4 +92,15 @@ export async function AddProduto(req, res) {
 
     // await db.collection("produtos").deleteMany({})
     // res.send('Apagado!')
+}
+
+export async function MostraProduto(req, res) {
+
+    try {
+        const galaxias = await db.collection("produtos").find().toArray()
+        return res.status(200).send(galaxias)
+    }
+    catch {
+        res.status(500).send('Não achamos os produtos')
+    }
 }
