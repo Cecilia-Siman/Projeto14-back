@@ -56,7 +56,7 @@ export async function RemoveCarrinho(req, res) {
         //         $or: [{ nome: produto.nome }, { idUser: idUser }]
         //     }
         // )
-        const produtApagar = await db.collection("carrinho").delete(
+        const produtApagar = await db.collection("carrinho").deleteOne(
             {
                 $and: [{ nome: produto.nome }, { idUser: objectId(meUsuraio._id) }]
             }
