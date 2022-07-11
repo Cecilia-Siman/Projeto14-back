@@ -46,37 +46,39 @@ export async function AddProduto(req, res) {
 
     const valid = userSchema.validate({ galaxia, nome });
 
-    const galaxias = await db.collection("produtos").findOne({ galaxia });
+    const galaxias = await db.collection("produtos").find().toArray()
 
-    if (valid) {
+    // if (valid) {
 
-        const novoProduto = {
-            nome,
-            tipo,
-            preco,
-            descricao
-        }
-        const estoque = galaxias.estoque
-        let novoEstoque = [...estoque, novoProduto]
+    //     const novoProduto = {
+    //         nome,
+    //         tipo,
+    //         preco,
+    //         descricao
+    //     }
+    //     const estoque = galaxias.estoque
+    //     let novoEstoque = [...estoque, novoProduto]
 
-        try {
-            await db.collection("produtos").updateOne(
-                { galaxia },
-                {
-                    $set: {
-                        estoque: novoEstoque
-                    }
-                }
-            );
+    //     try {
+    //         await db.collection("produtos").updateOne(
+    //             { galaxia },
+    //             {
+    //                 $set: {
+    //                     estoque: novoEstoque
+    //                 }
+    //             }
+    //         );
 
-            const galaxiaAtualizada = await db.collection("produtos").findOne({ galaxia });
-            return res.send(galaxiaAtualizada)
-        }
-        catch {
-            return res.send('deu merda na atualização')
-        }
-    }
-    else {
-        res.status(422).send(valid.error.details);
-    }
+    //         const galaxiaAtualizada = await db.collection("produtos").findOne({ galaxia });
+    //         return res.send(galaxiaAtualizada)
+    //     }
+    //     catch {
+    //         return res.send('deu merda na atualização')
+    //     }
+    // }
+    // else {
+    //     res.status(422).send(valid.error.details);
+    // }
+
+    res.send(200)
 }
