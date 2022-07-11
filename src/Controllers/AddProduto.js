@@ -46,49 +46,49 @@ export async function AddProduto(req, res) {
 
     const valid = userSchema.validate({ galaxia, nome });
 
-    // const galaxias = await db.collection("produtos").findOne({ galaxia })
+    const galaxias = await db.collection("produtos").findOne({ galaxia })
 
-    // if (valid) {
-    //     if (galaxias) {
+    if (valid) {
+        if (galaxias) {
 
-    //         const novoProduto = {
-    //             nome,
-    //             tipo,
-    //             preco,
-    //             descricao
-    //         }
-    //         const estoque = galaxias.estoque
-    //         let novoEstoque = [...estoque, novoProduto]
+            const novoProduto = {
+                nome,
+                tipo,
+                preco,
+                descricao
+            }
+            const estoque = galaxias.estoque
+            let novoEstoque = [...estoque, novoProduto]
 
-    //         try {
-    //             await db.collection("produtos").updateOne(
-    //                 { galaxia },
-    //                 {
-    //                     $set: {
-    //                         estoque: novoEstoque
-    //                     }
-    //                 }
-    //             );
+            try {
+                await db.collection("produtos").updateOne(
+                    { galaxia },
+                    {
+                        $set: {
+                            estoque: novoEstoque
+                        }
+                    }
+                );
 
-    //             const galaxiaAtualizada = await db.collection("produtos").findOne({ galaxia });
-    //             return res.send(galaxiaAtualizada)
-    //         }
-    //         catch {
-    //             return res.send('deu merda na atualização')
-    //         }
-    //     }
-    //     else {
-    //         const novaGalaxia = {
-    //             galaxia: galaxia,
-    //             estoque: []
-    //         }
-    //         const adicionaGalaxia = await db.collection("produtos").insertOne(novaGalaxia)
-    //         return res.send('Gaalaxia adicionada')
-    //     }
-    // } else {
-    //     return res.send(404)
-    // }
+                const galaxiaAtualizada = await db.collection("produtos").findOne({ galaxia });
+                return res.send(galaxiaAtualizada)
+            }
+            catch {
+                return res.send('deu merda na atualização')
+            }
+        }
+        else {
+            const novaGalaxia = {
+                galaxia: galaxia,
+                estoque: []
+            }
+            const adicionaGalaxia = await db.collection("produtos").insertOne(novaGalaxia)
+            return res.send('Gaalaxia adicionada')
+        }
+    } else {
+        return res.send(404)
+    }
 
-    await db.collection("produtos").deleteMany({})
-    res.send('Apagado!')
+    // await db.collection("produtos").deleteMany({})
+    // res.send('Apagado!')
 }
