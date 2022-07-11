@@ -80,5 +80,5 @@ export async function AddProduto(req, res) {
     //     res.status(422).send(valid.error.details);
     // }
 
-    res.send(200)
+    res.status(200).send(galaxias)
 }
