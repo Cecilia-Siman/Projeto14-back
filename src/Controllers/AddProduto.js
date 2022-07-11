@@ -49,7 +49,7 @@ export async function AddProduto(req, res) {
     const galaxias = await db.collection("produtos").findOne({ galaxia })
 
     if (galaxias.estoque) {
-        return res.send('existe alguma')
+        return res.send(galaxias)
     }
     else {
         const novaGalaxia = {
