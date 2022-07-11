@@ -51,9 +51,8 @@ export async function RemoveCarrinho(req, res) {
         const idUser = objectId(meUsuraio._id)
         // const produtoAdicionado = { ...produto, idUser: idUser }
         // await db.collection("carrinho").insertOne(produtoAdicionado)
-        const produtApagar = await db.collection("carrinho").findOne(
-            // { $and: [{ idUser }, { nome: produto.nome }] })
-            { nome: produto.nome })
+        const produtApagar = await db.collection("carrinho").find(
+            { $and: [{ nome: produto.nome }, { produto: { $exists: true } }] })
         res.send(produtApagar)
     }
     catch {
