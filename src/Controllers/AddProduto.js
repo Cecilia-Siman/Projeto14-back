@@ -37,7 +37,7 @@ export async function AddProduto(req, res) {
     //     ]
     // },
 
-    const { galaxia, nome, tipo, preco, descricao } = req.body
+    const { galaxia, nome, tipo, preco, descricao,imagem } = req.body
 
     const userSchema = joi.object({
         galaxia: joi.string().required(),
@@ -55,7 +55,8 @@ export async function AddProduto(req, res) {
                 nome,
                 tipo,
                 preco,
-                descricao
+                descricao,
+                imagem
             }
             const estoque = galaxias.estoque
             let novoEstoque = [...estoque, novoProduto]
