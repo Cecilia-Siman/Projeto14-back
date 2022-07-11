@@ -53,7 +53,7 @@ export async function AddProduto(req, res) {
     }
     else {
         const novaGalaxia = {
-            galaxia,
+            galaxia: galaxia,
             estoque: []
         }
         await db.collection("produtos").insertOne(novaGalaxia)
