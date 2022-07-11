@@ -27,9 +27,9 @@ export async function Cadastro(req, res) {
         };
 
         await db.collection("users").insertOne(newUser);
-        res.status(201).send(valid.error);
+        return res.status(201).send(valid.error);
     }
     else {
-        res.status(422).send(valid.error.details);
+        return res.status(422).send(valid.error.details);
     }
 }
