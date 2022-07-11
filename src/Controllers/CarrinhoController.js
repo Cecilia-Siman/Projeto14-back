@@ -52,8 +52,9 @@ export async function RemoveCarrinho(req, res) {
         // const produtoAdicionado = { ...produto, idUser: idUser }
         // await db.collection("carrinho").insertOne(produtoAdicionado)
         const produtApagar = await db.collection("carrinho").findOne(
-            { $and: [{ idUser }, { nome: produto.nome }] })
-        res.send(produto.nome)
+            // { $and: [{ idUser }, { nome: produto.nome }] })
+            { $and: [{ idUser: idUser }, { nome: produto.nome }] })
+        res.send(produtApagar)
     }
     catch {
         res.status(501).send('Não foi possível apagar seu carrinho!')
