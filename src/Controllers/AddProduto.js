@@ -53,10 +53,11 @@ export async function AddProduto(req, res) {
     //     estoque: []
     // }
 
-    // if (!galaxias) {
-    //     await db.collection("produtos").insertOne(novaGalaxia);
-    //     // return res.status(201).send('Adicionado nova galaxia');
-    // }
+    if (!galaxias) {
+        //     await db.collection("produtos").insertOne(novaGalaxia);
+        //     // return res.status(201).send('Adicionado nova galaxia');
+        return res.send('nao existe essa galaxia')
+    }
 
     if (valid) {
 
@@ -79,7 +80,6 @@ export async function AddProduto(req, res) {
                 }
             );
 
-            await db.collection("produtos").deleteMany({});
             const galaxiaAtualizada = await db.collection("produtos").findOne({ galaxia });
             return res.send(galaxiaAtualizada)
         }
