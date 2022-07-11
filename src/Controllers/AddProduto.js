@@ -76,7 +76,6 @@ export async function AddProduto(req, res) {
             catch {
                 return res.send('deu merda na atualização')
             }
-            return res.send('ja existe')
         }
         else {
             const novaGalaxia = {
@@ -84,7 +83,7 @@ export async function AddProduto(req, res) {
                 estoque: []
             }
             const adicionaGalaxia = await db.collection("produtos").insertOne(novaGalaxia)
-            return res.send(galaxias)
+            return res.send('Gaalaxia adicionada')
         }
     } else {
         return res.send(404)
