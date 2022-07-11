@@ -57,7 +57,7 @@ export async function RemoveCarrinho(req, res) {
         //     }
         // )
         const produtApagar = await db.collection("carrinho").find(
-            { idUser: idUser }
+            { idUser }
         )
         res.send(produtApagar)
     }
