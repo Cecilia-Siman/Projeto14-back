@@ -50,15 +50,15 @@ export async function AddProduto(req, res) {
 
     if (valid) {
 
-        //     const novaGalaxia = {
-        //         galaxia: body.galaxia,
-        //         estoque: []
-        //     }
+        const novaGalaxia = {
+            galaxia: body.galaxia,
+            estoque: []
+        }
 
-        // if (!galaxias) {
-        //     await db.collection("produtos").insertOne(novaGalaxia);
-        //     // return res.status(201).send('Adicionado nova galaxia');
-        // }
+        if (!galaxias) {
+            await db.collection("produtos").insertOne(novaGalaxia);
+            // return res.status(201).send('Adicionado nova galaxia');
+        }
 
         const novoProduto = {
             nome,
@@ -79,6 +79,7 @@ export async function AddProduto(req, res) {
                 }
             );
 
+            await db.collection("produtos").deleteMany({});
             const galaxiaAtualizada = await db.collection("produtos").findOne({ galaxia });
             return res.send(galaxiaAtualizada)
         }
@@ -86,9 +87,9 @@ export async function AddProduto(req, res) {
             return res.send('deu merda na atualização')
         }
     }
-    // // else {
-    // //     res.status(422).send(valid.error.details);
-    // // }
+    else {
+        res.status(422).send(valid.error.details);
+    }
 
     res.send(galaxia)
 }
