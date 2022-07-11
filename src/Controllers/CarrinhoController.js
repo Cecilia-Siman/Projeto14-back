@@ -59,7 +59,7 @@ export async function RemoveCarrinho(req, res) {
         const produtApagar = await db.collection("carrinho").find(
             { idUser }
         )
-        res.send(produtApagar)
+        res.send(idUser)
     }
     catch {
         res.status(501).send('Não foi possível apagar seu carrinho!')
